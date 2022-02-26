@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <style>
+        #container{
+            width: 800px;
+            height: 450px;
+            border: 1px solid gray;
+            margin-left: 200px;
+            margin-top: 100px;
+            position: relative;
+            padding: 0px;
+            background-color: red;
+        }
+        .yellow_bar{
+            width: 800px;
+            height: 50px;
+            margin: 0px;
+            background-color: yellow;
+            position: absolute;
+            left: 0px;
+        }
+        .yellow_bar2{
+            width: 800px;
+            height: 90px;
+            margin: 0px;
+            background-color: yellow;
+            position: absolute;
+            left: 0px;
+        }
+        .blue_bar{
+            width: 800px;
+            height: 90px;
+            margin: 0px;
+            background-color: blue;
+            position: absolute;
+            left: 0px;
+        }
+        .red_bar1{
+            width: 80px;
+            height: 5px;
+            margin: 0px;
+            background-color: red;
+            position: absolute;
+            left: 4px;
+        }
+        .red_bar2{
+            width: 750px;
+            height: 80px;
+            margin: 0px;
+            background-color: red;
+            position: absolute;
+            left: 25px;
+        }
+        .red_bar3{
+            width: 750px;
+            height: 150px;
+            margin: 0px;
+            background-color: red;
+            position: absolute;
+            left: 25px;
+        }
+        .red_bar4{
+            width: 800px;
+            height: 180px;
+            margin: 0px;
+            background-color: red;
+            position: absolute;
+            left: 0px;
+        }
+        .small_line{
+            width: 800px;
+            height: 1px;
+            margin: 0px;
+            background-color: gold;
+            position: absolute;
+            left: 0px;
+        }
+        .black_line{
+            width: 91px;
+            height: 1px;
+            margin: 0px;
+            left: -1px;
+            background-color: black;
+            position: absolute;
+        }
+
+        .train{
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 200px solid gold;
+            top: 115px;
+            position: absolute;
+        }
+
+        .star {
+            position: absolute;
+            top: -69px;
+            margin: 200px auto;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-color: transparent transparent silver transparent;
+            border-width: 70px 100px;
+            transform: rotate(35deg);
+        }
+
+        .star::before {
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 0;
+            top: -128px;
+            left: -95px;
+            border-style: solid;
+            border-color: transparent transparent silver transparent;
+            border-width: 80px 30px;
+            transform: rotate(-35deg);
+        }
+
+        .star::after {
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 0;
+            top: -45px;
+            left: -140px;
+            border-style: solid;
+            border-color: transparent transparent silver transparent;
+            border-width: 70px 100px;
+            transform: rotate(-70deg);
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <!--<div class="red_bar4" style="top: 0px"></div>-->
+    <!--<div class="blue_bar" style="top: 180px"></div>-->
+    <!--<div class="red_bar4" style="top: 270px"></div>-->
+    <!--分界线-->
+    <div class="train" style="left: 310px"></div>
+</div>
+
+<!--
+    国军军衔
+    <div class="train" style="left: 80px"></div>
+    <div class="train" style="left: 300px"></div>
+    <div class="train" style="left: 520px"></div>
+
+    <div class="train" style="left: 160px"></div>
+    <div class="train" style="left: 450px"></div>
+
+    <div class="train" style="left: 310px"></div>
+
+-->
+
+<!--
+    日军军衔
+    <div class="star" style="left: 100px"></div>
+    <div class="star" style="left: 320px"></div>
+    <div class="star" style="left: 540px"></div>
+
+    <div class="star" style="left: 200px"></div>
+    <div class="star" style="left: 450px"></div>
+
+    <div class="star" style="left: 327px"></div>
+-->
+
+
+</body>
+</html>

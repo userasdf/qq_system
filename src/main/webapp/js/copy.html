@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>clipboard示例</title>
+    <script src="clipboard.min.js"></script>
+    <script src="jquery-1.8.3.min.js"></script>
+
+</head>
+<body>
+
+<div style="border: 1px solid red;width:40px;height: 40px;padding: 1px 2px 3px 4px">
+    <div style="border: 1px solid red">asd</div>
+</div>
+
+<textarea id="area">asd
+    sadf asdf </textarea>
+<button id="btn" data-clipboard-target="#area">复制</button>
+<button onclick="fun()">按钮</button>
+<script>
+    var btn = document.getElementById("btn");
+    new ClipboardJS(btn);
+
+
+    function fun() {
+        var text = $("#area").val();
+        alert(text)
+    }
+</script>
+</body>
+</html>

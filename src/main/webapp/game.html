@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>游戏</title>
+    <style>
+        #container{
+            position: relative;
+            margin-top: 50px;
+            margin-left: 150px;
+            padding-left: 0px;
+            border: 4px solid red;
+            width: 950px;
+            height: 500px;
+        }
+        .heng{
+            height: 0px;
+            width: 948px;
+            border: 2px solid red;
+            position: absolute;
+        }
+        .shu{
+            width: 0px;
+            height: 498px;
+            border: 2px solid red;
+            position: absolute;
+        }
+        .obj{
+            width: 85px;
+            height: 65px;
+            background-color: green;
+            position: absolute;
+            text-align: center;
+            color: black;
+        }
+    </style>
+
+</head>
+<body>
+<div id="container">
+    <div class="heng" style="top: 100px"></div>
+    <div class="heng" style="top: 200px"></div>
+    <div class="heng" style="top: 300px"></div>
+    <div class="heng" style="top: 400px"></div>
+    <div class="shu" style="left: 135px"></div>
+    <div class="shu" style="left: 270px"></div>
+    <div class="shu" style="left: 405px"></div>
+    <div class="shu" style="left: 540px"></div>
+    <div class="shu" style="left: 675px"></div>
+    <div class="shu" style="left: 810px"></div>
+</div>
+</body>
+<!--<script src="/js/jquery-1.8.3.min.js"></script>-->
+<script src="jquery-1.8.3.min.js"></script>
+<script>
+
+    //加载棋子
+    load();
+    function load() {
+        qizi_list = ['上将,司令,1','中将,军长,2','少将,师长,3',
+                      '上校,旅长,4','中校,团长,5','少校,营长,6',
+                      '上尉,连长,7','中尉,排长,8','少尉,班长,9',
+                      '上士,普通老兵,10','中士,普通老兵,11','少士,普通老兵,12',
+                      '上等兵,新兵蛋子,13','一等兵,新兵蛋子,14','二等兵,新兵蛋子,15',
+                      '地雷,武器,16','坦克,武器,17','飞机,武器,18',
+                      '炸弹,武器,19','高射炮,武器,20','手雷,新兵蛋子,21',
+                      '飞行员,技术人员,22','工兵,技术人员,23','装甲兵,技术人员,24'
+        ];
+        top_list = [-30,70,170,270,370,470];
+        left_list = [-40,95,230,365,500,635,770,905];
+        index = 0;
+        flag = 0;
+        for(i=0;i<6;i++)
+            for(j=0;j<8;j++){
+                $div = $("<div class='obj' id='"+i+"_"+j+"' " +
+                    "title='"+flag+","+qizi_list[index]+"' onclick='fun("+i+","+j+")'" +
+                    "style='top: "+top_list[i]+"px;left: "+left_list[j]+"px'></div>");
+                $("#container").append($div);
+                index += 1;
+                if(index==24)
+                {
+                    index = 0;
+                    flag = 1;
+                }
+
+            }
+    }
+
+
+    //吃掉对方棋子
+    function attack(temp, target,i,j) {
+        temp.css("top",target.css("top"));
+        temp.css("left",target.css("left"));
+        target.remove();
+        alert(temp.attr("onclick"))
+        temp.attr("onclick",fun(i,j));
+        alert(temp.attr("onclick"))
+    }
+
+    //取消选中某一个棋子
+    function un_choose(i,j) {
+        $("#"+i+"_"+j).css("border","0px none rgb(0, 0, 0)");
+        if(i>0){
+            if($("#"+(i-1)+"_"+j).children().length==0)
+                $("#"+(i-1)+"_"+j).css("background-color","green");
+            else{
+                var flag = $("#"+(i-1)+"_"+j).attr("title").split(",")[0];
+                if(flag=='0')
+                    $("#"+(i-1)+"_"+j).css("background-color","blue");
+                else
+                    $("#"+(i-1)+"_"+j).css("background-color","red");
+            }
+        }
+        if(i<5){
+            if($("#"+(i+1)+"_"+j).children().length==0)
+                $("#"+(i+1)+"_"+j).css("background-color","green");
+            else{
+                var flag = $("#"+(i+1)+"_"+j).attr("title").split(",")[0];
+                if(flag=='0')
+                    $("#"+(i+1)+"_"+j).css("background-color","blue");
+                else
+                    $("#"+(i+1)+"_"+j).css("background-color","red");
+            }
+        }
+        if(j>0){
+            if($("#"+(i)+"_"+(j-1)).children().length==0)
+                $("#"+(i)+"_"+(j-1)).css("background-color","green");
+            else{
+                var flag = $("#"+(i)+"_"+(j-1)).attr("title").split(",")[0];
+                if(flag=='0')
+                    $("#"+(i)+"_"+(j-1)).css("background-color","blue");
+                else
+                    $("#"+(i)+"_"+(j-1)).css("background-color","red");
+            }
+        }
+        if(j<7){
+            if($("#"+(i)+"_"+(j+1)).children().length==0)
+                $("#"+(i)+"_"+(j+1)).css("background-color","green");
+            else{
+                var flag = $("#"+(i)+"_"+(j+1)).attr("title").split(",")[0];
+                if(flag=='0')
+                    $("#"+(i)+"_"+(j+1)).css("background-color","blue");
+                else
+                    $("#"+(i)+"_"+(j+1)).css("background-color","red");
+            }
+        }
+    }
+
+    var chosed_i = -1;
+    var chosed_j = -1;
+
+
+
+    function fun(i,j) {
+        $div = $("#"+i+"_"+j);
+        //如果当前元素是黄色背景
+        if($div.css("background-color")=="rgb(255, 255, 0)"){
+            target_flag = $div.attr("title").split(',')[0];
+            temp_flag = $("#"+chosed_i+"_"+chosed_j).attr("title").split(',')[0];
+            //如果是己方棋子
+            if(target_flag==temp_flag){
+                alert("己方棋子，不能动！");
+                return
+            }
+            //判断己方棋子与目标棋子的军衔高低
+            target_level = parseInt($div.attr("title").split(',')[3]);
+            temp_level = parseInt($("#"+chosed_i+"_"+chosed_j).attr("title").split(',')[3]);
+            if(temp_level<target_level){
+                attack($("#"+chosed_i+"_"+chosed_j),$div,i,j);
+            }else if(temp_level==target_level){
+                alert("同归于尽")
+            }else{
+                alert("吃不过")
+            }
+        }else if($div.children().length==0) {//翻开当前棋子
+            //取消选中之前选中的棋子
+            if(chosed_j!=-1&&chosed_i!=-1){
+                un_choose(chosed_i,chosed_j);
+            }
+            //更新当前选中的棋子
+            chosed_i = i;
+            chosed_j = j;
+            var res_list = $div.attr("title").split(',');
+            $_rank = $("<p style='margin: 0px'>"+res_list[1]+"</p>");
+            $_post = $("<p style='margin: 0px'>"+res_list[2]+"</p>");
+            $div.append($_rank).append($_post);
+            if(res_list[0]=='0')
+                $div.css("background-color","blue");
+            else
+                $div.css("background-color","red");
+        }else if($div.css("border")=="3px solid rgb(255, 0, 0)"){
+            un_choose(i,j);//取消选中当前棋子
+        }else if($div.children().length>0&&$div.css("border")=="0px none rgb(0, 0, 0)"){//对当前棋子执行某种操作
+            //取消选中之前选中的棋子
+            if(chosed_j!=-1&&chosed_i!=-1){
+                un_choose(chosed_i,chosed_j);
+            }
+            //更新当前选中的棋子
+            chosed_i = i;
+            chosed_j = j;
+            $div.css("border","3px solid red");
+            if(i>0){
+                $("#"+(i-1)+"_"+(j)).css("background-color","yellow");
+            }
+            if(j>0){
+                $("#"+(i)+"_"+(j-1)).css("background-color","yellow");
+            }
+            if(i<5){
+                $("#"+(i+1)+"_"+(j)).css("background-color","yellow");
+            }
+            if(j<7){
+                $("#"+(i)+"_"+(j+1)).css("background-color","yellow");
+            }
+        }
+    }
+</script>
+</html>

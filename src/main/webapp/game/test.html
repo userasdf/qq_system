@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <style>
+        div{
+            width: 400px;
+            height: 100px;
+            color: gray;
+            border: 1px red dashed;
+        }
+    </style>
+</head>
+<body>
+<button class="btn">点击我</button>
+<div id="div2">
+    <p>人的灵魂所必须的东西，是不需要用金钱来买的</p>
+</div>
+<style>
+    div{height: 200px;width: 200px;padding:15px;background: #ececec;display: none;}
+</style>
+<script src="jquery-1.8.3.min.js"></script>
+<script>
+
+    $('.btn').click(function(){
+        alert("ASDf")
+        $('div').show();
+        $('div').animate({
+            'width':'300px',
+            'height':'300px'
+        },1000)
+    })
+
+</body>
+</html>
